@@ -1,0 +1,97 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{fontawesome}
+\usepackage{tikz}
+\usetikzlibrary{svg.path}
+
+
+\definecolor{cvblue}{HTML}{0E5484}
+\definecolor{black}{HTML}{130810}
+\definecolor{darkcolor}{HTML}{0F4539}
+\definecolor{cvgreen}{HTML}{3BD80D}
+\definecolor{taggreen}{HTML}{00E278}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\colorlet{name}{black}
+\colorlet{tagline}{darkcolor}
+\colorlet{heading}{darkcolor}
+\colorlet{headingrule}{cvblue}
+\colorlet{accent}{darkcolor}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+\begin{document}
+
+%----------HEADER-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  {\LARGE \textbf{John Doe}} & \href{mailto:john.doe@email.com}{john.doe@email.com} \\
+  Web Developer & (123) 456-7890 \\
+  \href{https://www.linkedin.com/in/johndoe}{linkedin.com/in/johndoe} | \href{https://github.com/johndoe}{github.com/johndoe} & City, State
+\end{tabular*}
+
+%--------SUMMARY------------------
+\section*{\textcolor{heading}{Summary}}
+\noindent
+Highly motivated and skilled Web Developer with 5+ years of experience in designing and developing responsive and user-friendly web applications. Proficient in front-end and back-end technologies, with a strong focus on delivering high-quality code and exceptional user experiences.
+
+%--------SKILLS------------------
+\section*{\textcolor{heading}{Skills}}
+\noindent
+\textbf{Front-end:} HTML5, CSS3, JavaScript (ES6+), React, Angular, Vue.js, Responsive Design, UI/UX Design\\
+\textbf{Back-end:} Node.js, Python (Django, Flask), SQL, NoSQL (MongoDB), RESTful APIs\\
+\textbf{Tools:} Git, Docker, Webpack, Babel, VS Code, Jira
+
+%--------EXPERIENCE------------------
+\section*{\textcolor{heading}{Experience}}
+\noindent
+\textbf{Senior Web Developer} | ABC Company | 2020 - Present \\
+\begin{itemize}[leftmargin=0.2in, itemsep=0pt]
+    \item Developed and maintained responsive web applications using React and Node.js.
+    \item Collaborated with cross-functional teams to deliver high-quality software solutions.
+    \item Optimized website performance and improved user experience, resulting in a 20\% increase in user engagement.
+    \item Implemented RESTful APIs for seamless integration with back-end systems.
+\end{itemize}
+
+\noindent
+\textbf{Web Developer} | XYZ Corporation | 2018 - 2020 \\
+\begin{itemize}[leftmargin=0.2in, itemsep=0pt]
+    \item Designed and developed web pages using HTML, CSS, and JavaScript.
+    \item Assisted in the development of a large-scale e-commerce platform.
+    \item Resolved website bugs and improved website functionality.
+\end{itemize}
+
+%--------EDUCATION------------------
+\section*{\textcolor{heading}{Education}}
+\noindent
+\textbf{Bachelor of Science in Computer Science} | University of Example | 2014 - 2018
+
+%--------PROJECTS------------------
+\section*{\textcolor{heading}{Projects}}
+\noindent
+\textbf{E-commerce Website} | GitHub: \href{https://github.com/johndoe/ecommerce}{github.com/johndoe/ecommerce} \\
+Developed a fully functional e-commerce website using React and Node.js, featuring user authentication, product management, and payment integration.
+
+\noindent
+\textbf{Portfolio Website} | \href{https://johndoe-portfolio.com}{johndoe-portfolio.com} \\
+Created a personal portfolio website to showcase web development skills and projects, using Vue.js and responsive design principles.
+
+\end{document}
