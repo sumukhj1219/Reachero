@@ -45,71 +45,72 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: rgb(255, 255, 255); /* oklch(1 0 0) */
+  --foreground: rgb(37, 37, 37); /* Approximate for oklch(0.145 0 0) - Use a converter for accuracy */
+  --card: rgb(255, 255, 255); /* oklch(1 0 0) */
+  --card-foreground: rgb(37, 37, 37); /* Approximate for oklch(0.145 0 0) - Use a converter for accuracy */
+  --popover: rgb(255, 255, 255); /* oklch(1 0 0) */
+  --popover-foreground: rgb(37, 37, 37); /* Approximate for oklch(0.145 0 0) - Use a converter for accuracy */
+  --primary: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --primary-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --secondary: rgb(247, 247, 247); /* Approximate for oklch(0.97 0 0) - Use a converter for accuracy */
+  --secondary-foreground: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --muted: rgb(247, 247, 247); /* Approximate for oklch(0.97 0 0) - Use a converter for accuracy */
+  --muted-foreground: rgb(142, 142, 142); /* Approximate for oklch(0.556 0 0) - Use a converter for accuracy */
+  --accent: rgb(247, 247, 247); /* Approximate for oklch(0.97 0 0) - Use a converter for accuracy */
+  --accent-foreground: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --destructive: rgb(219, 68, 55); /* Approximate for oklch(0.577 0.245 27.325) - Use a converter for accuracy */
+  --border: rgb(235, 235, 235); /* Approximate for oklch(0.922 0 0) - Use a converter for accuracy */
+  --input: rgb(235, 235, 235); /* Approximate for oklch(0.922 0 0) - Use a converter for accuracy */
+  --ring: rgb(180, 180, 180); /* Approximate for oklch(0.708 0 0) - Use a converter for accuracy */
+  --chart-1: rgb(232, 140, 61); /* Approximate for oklch(0.646 0.222 41.116) - Use a converter for accuracy */
+  --chart-2: rgb(82, 179, 179); /* Approximate for oklch(0.6 0.118 184.704) - Use a converter for accuracy */
+  --chart-3: rgb(48, 120, 179); /* Approximate for oklch(0.398 0.07 227.392) - Use a converter for accuracy */
+  --chart-4: rgb(191, 214, 102); /* Approximate for oklch(0.828 0.189 84.429) - Use a converter for accuracy */
+  --chart-5: rgb(196, 181, 79); /* Approximate for oklch(0.769 0.188 70.08) - Use a converter for accuracy */
+  --sidebar: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --sidebar-foreground: rgb(37, 37, 37); /* Approximate for oklch(0.145 0 0) - Use a converter for accuracy */
+  --sidebar-primary: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --sidebar-primary-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --sidebar-accent: rgb(247, 247, 247); /* Approximate for oklch(0.97 0 0) - Use a converter for accuracy */
+  --sidebar-accent-foreground: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --sidebar-border: rgb(235, 235, 235); /* Approximate for oklch(0.922 0 0) - Use a converter for accuracy */
+  --sidebar-ring: rgb(180, 180, 180); /* Approximate for oklch(0.708 0 0) - Use a converter for accuracy */
 }
 
+
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: rgb(37, 37, 37); /* Approximate for oklch(0.145 0 0) - Use a converter for accuracy */
+  --foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --card: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --card-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --popover: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --popover-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --primary: rgb(235, 235, 235); /* Approximate for oklch(0.922 0 0) - Use a converter for accuracy */
+  --primary-foreground: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --secondary: rgb(68, 68, 68); /* Approximate for oklch(0.269 0 0) - Use a converter for accuracy */
+  --secondary-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --muted: rgb(68, 68, 68); /* Approximate for oklch(0.269 0 0) - Use a converter for accuracy */
+  --muted-foreground: rgb(180, 180, 180); /* Approximate for oklch(0.708 0 0) - Use a converter for accuracy */
+  --accent: rgb(68, 68, 68); /* Approximate for oklch(0.269 0 0) - Use a converter for accuracy */
+  --accent-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --destructive: rgb(225, 84, 64); /* Approximate for oklch(0.704 0.191 22.216) - Use a converter for accuracy */
+  --border: rgba(255, 255, 255, 0.1); /* Approximate for oklch(1 0 0 / 10%) - Use a converter for accuracy */
+  --input: rgba(255, 255, 255, 0.15); /* Approximate for oklch(1 0 0 / 15%) - Use a converter for accuracy */
+  --ring: rgb(142, 142, 142); /* Approximate for oklch(0.556 0 0) - Use a converter for accuracy */
+  --chart-1: rgb(119, 181, 255); /* Approximate for oklch(0.488 0.243 264.376) - Use a converter for accuracy */
+  --chart-2: rgb(158, 217, 255); /* Approximate for oklch(0.696 0.17 162.48) - Use a converter for accuracy */
+  --chart-3: rgb(196, 181, 79); /* Approximate for oklch(0.769 0.188 70.08) - Use a converter for accuracy */
+  --chart-4: rgb(160, 163, 255); /* Approximate for oklch(0.627 0.265 303.9) - Use a converter for accuracy */
+  --chart-5: rgb(255, 173, 135); /* Approximate for oklch(0.645 0.246 16.439) - Use a converter for accuracy */
+  --sidebar: rgb(52, 52, 52); /* Approximate for oklch(0.205 0 0) - Use a converter for accuracy */
+  --sidebar-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --sidebar-primary: rgb(119, 181, 255); /* Approximate for oklch(0.488 0.243 264.376) - Use a converter for accuracy */
+  --sidebar-primary-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --sidebar-accent: rgb(68, 68, 68); /* Approximate for oklch(0.269 0 0) - Use a converter for accuracy */
+  --sidebar-accent-foreground: rgb(251, 251, 251); /* Approximate for oklch(0.985 0 0) - Use a converter for accuracy */
+  --sidebar-border: rgba(255, 255, 255, 0.1); /* Approximate for oklch(1 0 0 / 10%) - Use a converter for accuracy */
+  --sidebar-ring: rgb(142, 142, 142); /* Approximate for oklch(0.556 0 0) - Use a converter for accuracy */
 }
 
 @layer base {
