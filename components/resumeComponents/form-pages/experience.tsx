@@ -18,9 +18,8 @@ const Experience = () => {
 
     return (
         <div>
-            <h2>Experience</h2>
             {experienceDetails.map((experience) => (
-                <div key={experience.id} className="mb-4 border p-4 rounded-md">
+                <div key={experience.id} className="mb-4 p-4 rounded-md">
                     <div className="grid gap-4">
                         <div className="space-y-2">
                             <Label htmlFor={`company-${experience.id}`}>Company</Label>
@@ -77,7 +76,7 @@ const Experience = () => {
                     </div>
                 </div>
             ))}
-            <Button type="button" onClick={addEmptyExperience}>
+            <Button type="button" size={'sm'} onClick={addEmptyExperience}>
                 Add New Experience
             </Button>
         </div>

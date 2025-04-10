@@ -2,10 +2,9 @@
 import React from 'react';
 import useResumeStore from '@/context/resumeContext';
 import { Separator } from '../ui/separator';
-// import { formatDate } from '@/lib/utils'; // Assuming you have a utility function for date formatting
 
 const ResumePreview = () => {
-    const { firstName, lastName, city, state, country, phone, email, educationDetails, skills, experienceDetails } = useResumeStore();
+    const { firstName, lastName, city, state, country, phone, email, educationDetails, skills, experienceDetails, projectDetails } = useResumeStore();
 
     const locationInfo = [city, state, country].filter(Boolean).join(' , ');
     const contactInfo = [phone, email].filter(Boolean).join(' | ');
@@ -77,28 +76,30 @@ const ResumePreview = () => {
             </div>
 
             {experienceDetails && experienceDetails.length > 0 ? (
-    experienceDetails.map((exp, index) => (
-        <div key={index} className="mt-1">
-            <div className="flex justify-between items-baseline">
-                <span className="font-semibold">{exp.company}</span>
-                <span className="text-sm italic">{exp.position}</span>
-                <span className="text-sm">
-                    {exp.startDate && formatDate(exp.startDate, 'MM/YYYY')} -
-                    {exp.endDate ? formatDate(exp.endDate, 'MM/YYYY') : ' Present'}
-                </span>
-            </div>
-            {exp.description && (
-                <ul className="list-disc pl-5 mt-1 text-sm">
-                    {exp.description.split('\n').map((item, i) => (
-                        <li key={i}>{item}</li>
-                    ))}
-                </ul>
+                experienceDetails.map((exp, index) => (
+                    <div key={index} className="mt-1">
+                        <div className="flex justify-between items-baseline">
+                            <span className="font-semibold">{exp.company}</span>
+                            <span className="text-sm italic">{exp.position}</span>
+                            {exp.startDate || exp.endDate ? (
+                                <span className="text-sm">
+                                    {exp.startDate && formatDate(exp.startDate, 'MM/YYYY')} -
+                                    {exp.endDate ? formatDate(exp.endDate, 'MM/YYYY') : ' Present'}
+                                </span>
+                            ) : null}
+                        </div>
+                        {exp.description && (
+                            <ul className="list-disc pl-5 mt-1 text-sm">
+                                {exp.description.split('\n').map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                ))
+            ) : (
+                <p className="mt-4 text-sm text-muted-foreground">No experience details added.</p>
             )}
-        </div>
-    ))
-) : (
-    <p className="mt-4 text-sm text-muted-foreground">No experience details added.</p>
-)}
 
             <div className="mt-4">
                 <Separator className="bg-black" />
@@ -106,11 +107,28 @@ const ResumePreview = () => {
                 <Separator className="bg-black" />
             </div>
 
-            <div className="mt-4">
+            {projectDetails && projectDetails.length > 0 ? (
+                projectDetails.map((project, index) => (
+                    <div key={index} className="mt-1">
+                        <span className="font-semibold">{project.projectName}:</span>
+                        {project.description && (
+                            <ul className="list-disc pl-5 mt-1 text-sm">
+                                {project.description.split('\n').map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                ))
+            ) : (
+                <p className="mt-4 text-sm text-muted-foreground">No projects added.</p>
+            )}
+
+            {/* <div className="mt-4">
                 <Separator className="bg-black" />
                 <span className="font-semibold text-lg">ACHIEVEMENTS</span>
                 <Separator className="bg-black" />
-            </div>
+            </div> */}
         </div>
     );
 };

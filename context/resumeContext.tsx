@@ -10,11 +10,17 @@ interface EducationDetails {
 }
 
 interface ExperienceDetails {
-    id: string; // Add an ID to identify each experience entry
+    id: string;
     company: string;
     position: string;
     startDate: Date | undefined;
     endDate: Date | undefined;
+    description: string;
+}
+
+interface Projects {
+    id: string;
+    projectName: string;
     description: string;
 }
 
@@ -32,10 +38,15 @@ interface ResumeState {
     state: string;
     country: string;
     experienceDetails: ExperienceDetails[];
-    addEmptyExperience: () => void; // Function to add a new empty experience
-    addExperience: (experience: Omit<ExperienceDetails, 'id'>) => void; // Function to add a pre-formed experience
+    addEmptyExperience: () => void;
+    addExperience: (experience: Omit<ExperienceDetails, 'id'>) => void;
     removeExperience: (idToRemove: string) => void;
-    updateExperience: (id: string, updates: Partial<ExperienceDetails>) => void; // Modified update function
+    updateExperience: (id: string, updates: Partial<ExperienceDetails>) => void;
+    projectDetails: Projects[];
+    addEmptyProject: () => void;
+    addProject: (project: Omit<Projects, 'id'>) => void;
+    removeProject: (idToRemove: string) => void;
+    updateProject: (id: string, updates: Partial<Projects>) => void;
     skills: Skill[];
     educationDetails: EducationDetails[];
     setFirstName: (firstName: string) => void;
@@ -53,6 +64,7 @@ interface ResumeState {
 
 const initialEducationDetails: EducationDetails[] = [];
 const initialExperienceDetails: ExperienceDetails[] = [];
+const initialProjectDetails: Projects[] = [];
 
 const useResumeStore = create<ResumeState>()(
     devtools(
@@ -110,6 +122,28 @@ const useResumeStore = create<ResumeState>()(
                     set((state) => ({
                         experienceDetails: state.experienceDetails.map((exp) =>
                             exp.id === id ? { ...exp, ...updates } : exp
+                        ),
+                    })),
+                projectDetails: initialProjectDetails,
+                addEmptyProject: () => set((state) => ({
+                    projectDetails: [
+                        ...state.projectDetails,
+                        { id: crypto.randomUUID(), projectName: "", description: "" },
+                    ],
+                })),
+                addProject: (project) => set((state) => ({
+                    projectDetails: [
+                        ...state.projectDetails,
+                        { id: crypto.randomUUID(), ...project },
+                    ],
+                })),
+                removeProject: (idToRemove: string) => set((state) => ({
+                    projectDetails: state.projectDetails.filter((project) => project.id !== idToRemove),
+                })),
+                updateProject: (id: string, updates: Partial<Projects>) =>
+                    set((state) => ({
+                        projectDetails: state.projectDetails.map((project) =>
+                            project.id === id ? { ...project, ...updates } : project
                         ),
                     })),
             }),
