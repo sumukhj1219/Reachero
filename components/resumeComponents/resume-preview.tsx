@@ -4,7 +4,7 @@ import useResumeStore from '@/context/resumeContext';
 import { Separator } from '../ui/separator';
 
 const ResumePreview = () => {
-  const { firstName, lastName, city, state, country, phone, email, educationDetails } = useResumeStore();
+  const { firstName, lastName, city, state, country, phone, email, educationDetails, skills } = useResumeStore();
 
   const locationInfo = [
     city,
@@ -21,6 +21,15 @@ const ResumePreview = () => {
     locationInfo,
     contactInfo,
   ].filter(Boolean).join(' | ');
+
+  const groupedSkills = skills.reduce((acc, skillObj) => {
+    const { category, skill } = skillObj;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(skill);
+    return acc;
+  }, {} as { [key: string]: string[] });
 
   return (
     <div>
@@ -60,6 +69,17 @@ const ResumePreview = () => {
         <span className="font-semibold text-lg">SKILLS</span>
         <Separator className="bg-black" />
       </div>
+
+      {Object.keys(groupedSkills).length > 0 ? (
+        Object.keys(groupedSkills).map((category, index) => (
+          <div key={index} >
+            <span className="font-semibold">{category}:</span>
+            <span className="text-sm ml-2">{groupedSkills[category]?.join(', ')}.</span>
+          </div>
+        ))
+      ) : (
+        <p className="mt-4 text-sm text-muted-foreground">No skills added.</p>
+      )}
 
       <div className="mt-4">
         <Separator className="bg-black" />
