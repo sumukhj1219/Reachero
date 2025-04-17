@@ -8,6 +8,9 @@ import Education from './form-pages/education';
 import Skills from './form-pages/skills';
 import Experience from './form-pages/experience';
 import Projects from './form-pages/projects';
+import Achievements from './form-pages/achievements';
+import axios from "axios"
+import useResumeStore from '@/context/resumeContext';
 
 const items = [
     { title: "Personal Details", component: <PersonalDetails /> },
@@ -15,6 +18,7 @@ const items = [
     { title: "Skills", component: <Skills /> },
     { title: "Experience", component: <Experience /> },
     { title: "Projects", component: <Projects /> },
+    { title: "Achievements", component: <Achievements /> },
 ];
 
 const ResumeForm = () => {
@@ -57,10 +61,52 @@ const ResumeForm = () => {
             </div>
 
             {currentTabIndex === items.length - 1 && (
-                <Button type="submit" className="w-full">
-                    Submit Resume
-                </Button>
-            )}
+    <Button
+        type="submit"
+        className="w-full"
+        onClick={async () => {
+            const {
+                firstName,
+                lastName,
+                email,
+                phone,
+                city,
+                state,
+                country,
+                educationDetails,
+                experienceDetails,
+                projectDetails,
+                skills,
+                achievements
+            } = useResumeStore.getState();
+
+            const resumeData = {
+                firstName,
+                lastName,
+                email,
+                phone,
+                city,
+                state,
+                country,
+                educationDetails,
+                experienceDetails,
+                projectDetails,
+                skills,
+                achievements
+            };
+
+            try {
+                const res = await axios.post("/api/submit-resume", resumeData);
+                console.log("Resume submitted successfully", res.data);
+            } catch (error) {
+                console.error("Error submitting resume:", error);
+            }
+        }}
+    >
+        Submit Resume
+    </Button>
+)}
+
         </div>
     );
 };

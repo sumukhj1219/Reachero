@@ -4,11 +4,11 @@ import useResumeStore from '@/context/resumeContext';
 import { Separator } from '../ui/separator';
 import { jsPDF } from 'jspdf';
 import { Button } from '../ui/button';
-import html2canvas from 'html2canvas'; // Import html2canvas
+import html2canvas from 'html2canvas';
 
 const ResumePreview = () => {
     const resumeRef = useRef<HTMLDivElement>(null);
-    const { firstName, lastName, city, state, country, phone, email, educationDetails, skills, experienceDetails, projectDetails } = useResumeStore();
+    const { firstName, lastName, city, state, country, phone, email, educationDetails, skills, experienceDetails, projectDetails, achievements } = useResumeStore();
 
     const locationInfo = [city, state, country].filter(Boolean).join(' , ');
     const contactInfo = [phone, email].filter(Boolean).join(' | ');
@@ -23,29 +23,29 @@ const ResumePreview = () => {
         return acc;
     }, {} as { [key: string]: string[] });
 
-   
 
-            const handleDownloadPDF = async () => {
-              if (resumeRef.current) {
-                  console.log("resumeRef.current:", resumeRef.current); // Check the ref
-          
-                  try {
-                      const canvas = await html2canvas(resumeRef.current, { scale: 1 });
-                      console.log("Canvas width:", canvas.width, "height:", canvas.height); // Check canvas dimensions
-                      const imgData = canvas.toDataURL('image/png');
-                      console.log("ImageData:", imgData ? imgData.substring(0, 100) + "..." : "Empty ImageData"); // Check if data URL is generated
-          
-                      const doc = new jsPDF();
-                      doc.addImage(imgData, 'PNG', 10, 10, 190, (190 * canvas.height) / canvas.width); // Simple addImage
-                      doc.save(`${firstName}_${lastName}_resume.pdf`);
-          
-                  } catch (error) {
-                      console.error("Error during PDF generation:", error);
-                  }
-                  
-              }
 
-          };
+    const handleDownloadPDF = async () => {
+        if (resumeRef.current) {
+            console.log("resumeRef.current:", resumeRef.current);
+
+            try {
+                const canvas = await html2canvas(resumeRef.current, { scale: 4, logging: true });
+                console.log("Canvas width:", canvas.width, "height:", canvas.height);
+                const imgData = canvas.toDataURL('image/png');
+                console.log("ImageData:", imgData ? imgData.substring(0, 100) + "..." : "Empty ImageData");
+
+                const doc = new jsPDF();
+                doc.addImage(imgData, 'PNG', 10, 10, 190, (190 * canvas.height) / canvas.width);
+                doc.save(`${firstName}_${lastName}_resume.pdf`);
+
+            } catch (error) {
+                console.error("Error during PDF generation:", error);
+            }
+
+        }
+
+    };
 
 
     const formatDate = (date: Date | undefined, format: 'MM/YYYY' | 'YYYY') => {
@@ -172,6 +172,21 @@ const ResumePreview = () => {
                     <span className="font-semibold text-lg">ACHIEVEMENTS</span>
                     <Separator className="bg-black" />
                 </div>
+
+                {achievements && achievements.length > 0 ? (
+                    <ul className="list-disc pl-5 mt-1 text-sm">
+                        {achievements.map((achievement, index) => (
+                            <li key={index} className="mb-2">
+                                <span className="font-semibold">{achievement.title}</span>
+                                <p className="text-sm">{achievement.description}</p>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="mt-4 text-sm text-muted-foreground">No achievements added.</p>
+                )}
+
+
             </div>
         </div>
     );

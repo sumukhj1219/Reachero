@@ -29,6 +29,12 @@ interface Skill {
     category: string;
 }
 
+interface Achivements {
+    id: string;
+    title: string;
+    description: string;
+}
+
 interface ResumeState {
     firstName: string;
     lastName: string;
@@ -60,6 +66,11 @@ interface ResumeState {
     setEducationDetails: (details: EducationDetails[]) => void;
     addSkill: (newSkill: Skill) => void;
     deleteSkill: (skillToDelete: Skill) => void;
+    achievements: Achivements[];
+    addAchievement: (achievement: Omit<Achivements, 'id'>) => void;
+    updateAchievement: (id: string, updates: Partial<Achivements>) => void;
+    deleteAchievement: (id: string) => void;
+
 }
 
 const initialEducationDetails: EducationDetails[] = [];
@@ -146,6 +157,25 @@ const useResumeStore = create<ResumeState>()(
                             project.id === id ? { ...project, ...updates } : project
                         ),
                     })),
+                achievements: [],
+                addAchievement: (achievement) =>
+                    set((state) => ({
+                        achievements: [
+                            ...state.achievements,
+                            { id: crypto.randomUUID(), ...achievement },
+                        ],
+                    })),
+                updateAchievement: (id, updates) =>
+                    set((state) => ({
+                        achievements: state.achievements.map((a) =>
+                            a.id === id ? { ...a, ...updates } : a
+                        ),
+                    })),
+                deleteAchievement: (id) =>
+                    set((state) => ({
+                        achievements: state.achievements.filter((a) => a.id !== id),
+                    })),
+
             }),
             {
                 name: 'resume-storage',

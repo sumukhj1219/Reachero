@@ -1,12 +1,17 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import useResumeStore from "@/context/resumeContext";
+import { Sparkles, Loader2 } from 'lucide-react';
+import { improveContentWithAI } from '../ai/improve-content';
 
 const Experience = () => {
     const { experienceDetails, addEmptyExperience, removeExperience, updateExperience } = useResumeStore();
+
+    const [loadingMap, setLoadingMap] = useState<Record<string, boolean>>({});
 
     const handleInputChange = (id: string, name: any, value: any) => {
         updateExperience(id, { [name]: value });
@@ -14,6 +19,19 @@ const Experience = () => {
 
     const handleDateChange = (id: string, name: any, value: string | undefined) => {
         updateExperience(id, { [name]: value ? new Date(value) : undefined });
+    };
+
+    const handleImproveClick = async (experience: any) => {
+        setLoadingMap(prev => ({ ...prev, [experience.id]: true }));
+
+        try {
+            const improved = await improveContentWithAI(experience);
+            updateExperience(experience.id, improved);
+        } catch (error) {
+            console.error("AI improvement failed:", error);
+        }
+
+        setLoadingMap(prev => ({ ...prev, [experience.id]: false }));
     };
 
     return (
@@ -46,7 +64,7 @@ const Experience = () => {
                                     type="date"
                                     id={`startDate-${experience.id}`}
                                     name="startDate"
-                                    value={experience.startDate?.toISOString().split('T')[0] || ""}
+                                    value={experience.startDate ? new Date(experience.startDate).toISOString().split('T')[0] : ""}
                                     onChange={(e) => handleDateChange(experience.id, 'startDate', e.target.value)}
                                 />
                             </div>
@@ -56,7 +74,7 @@ const Experience = () => {
                                     type="date"
                                     id={`endDate-${experience.id}`}
                                     name="endDate"
-                                    value={experience.endDate?.toISOString().split('T')[0] || ""}
+                                    value={experience.endDate ? new Date(experience.endDate).toISOString().split('T')[0] : ""}
                                     onChange={(e) => handleDateChange(experience.id, 'endDate', e.target.value)}
                                 />
                             </div>
@@ -70,6 +88,24 @@ const Experience = () => {
                                 onChange={(e) => handleInputChange(experience.id, 'description', e.target.value)}
                             />
                         </div>
+                        <div className="flex justify-end">
+                            <Button
+                                type="button"
+                                size="icon"
+                                variant={'ocean'}
+                                className="rounded-full text-yellow-300 shadow-md"
+                                disabled={loadingMap[experience.id]}
+                                onClick={() => handleImproveClick(experience)}
+                                title="Enhance with AI"
+                            >
+                                {loadingMap[experience.id] ? (
+                                    <Loader2 className="h-3 w-3 animate-spin" />
+                                ) : (
+                                    <Sparkles className="h-3 w-3" />
+                                )}
+                            </Button>
+                        </div>
+
                         <Button type="button" variant="destructive" size="sm" onClick={() => removeExperience(experience.id)}>
                             Remove
                         </Button>
