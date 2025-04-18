@@ -11,6 +11,7 @@ import Projects from './form-pages/projects';
 import Achievements from './form-pages/achievements';
 import axios from "axios"
 import useResumeStore from '@/context/resumeContext';
+import { useParams } from "next/navigation";
 
 const items = [
     { title: "Personal Details", component: <PersonalDetails /> },
@@ -19,10 +20,14 @@ const items = [
     { title: "Experience", component: <Experience /> },
     { title: "Projects", component: <Projects /> },
     { title: "Achievements", component: <Achievements /> },
-];
+]; 
 
 const ResumeForm = () => {
     const [currentTabIndex, setCurrentTabIndex] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const params = useParams();
+    const resumeId = params?.id;
 
     const goToPreviousTab = () => {
         setCurrentTabIndex((prev) => Math.max(0, prev - 1));
@@ -34,6 +39,52 @@ const ResumeForm = () => {
 
     const currentTabTitle = items[currentTabIndex].title;
 
+    const handleSubmit = async () => {
+        const {
+            firstName,
+            lastName,
+            email,
+            phone,
+            city,
+            state,
+            country,
+            educationDetails,
+            experienceDetails,
+            projectDetails,
+            skills,
+            achievements
+        } = useResumeStore.getState();
+
+        const resumeData = {
+            firstName,
+            lastName,
+            email,
+            phone,
+            city,
+            state,
+            country,
+            educationDetails,
+            experienceDetails,
+            projectDetails,
+            skills,
+            achievements
+        };
+
+        setLoading(true);
+        setSuccess(false);
+        try {
+            const res = await axios.post(`/api/resume/submit`, {...resumeData, resumeId});
+            if (res.status === 200) {
+                console.log("Resume submitted successfully", res.data);
+                setSuccess(true);
+            }
+        } catch (error) {
+            console.error("Error submitting resume:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="space-y-6">
             <Tabs value={currentTabTitle} onValueChange={(value) => setCurrentTabIndex(items.findIndex(item => item.title === value))}>
@@ -44,7 +95,7 @@ const ResumeForm = () => {
                         </TabsTrigger>
                     ))}
                 </TabsList>
-                {items.map((item, index) => (
+                {items.map((item) => (
                     <TabsContent key={item.title} value={item.title}>
                         {item.component}
                     </TabsContent>
@@ -61,52 +112,19 @@ const ResumeForm = () => {
             </div>
 
             {currentTabIndex === items.length - 1 && (
-    <Button
-        type="submit"
-        className="w-full"
-        onClick={async () => {
-            const {
-                firstName,
-                lastName,
-                email,
-                phone,
-                city,
-                state,
-                country,
-                educationDetails,
-                experienceDetails,
-                projectDetails,
-                skills,
-                achievements
-            } = useResumeStore.getState();
+                <div className="space-y-2">
+                    <Button
+                        type="submit"
+                        className="w-full"
+                        onClick={handleSubmit}
+                        disabled={loading}
+                    >
+                        {loading ? "Saving..." : "Submit Resume"}
+                    </Button>
 
-            const resumeData = {
-                firstName,
-                lastName,
-                email,
-                phone,
-                city,
-                state,
-                country,
-                educationDetails,
-                experienceDetails,
-                projectDetails,
-                skills,
-                achievements
-            };
-
-            try {
-                const res = await axios.post("/api/submit-resume", resumeData);
-                console.log("Resume submitted successfully", res.data);
-            } catch (error) {
-                console.error("Error submitting resume:", error);
-            }
-        }}
-    >
-        Submit Resume
-    </Button>
-)}
-
+                    {success && <p className="text-green-600 text-sm text-center">Resume submitted successfully!</p>}
+                </div>
+            )}
         </div>
     );
 };
